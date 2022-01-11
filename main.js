@@ -63,30 +63,35 @@ for(index = 0; index < posts.length; index++){
     createPosts(posts);
     
 }
-
-//variabili per selezionare i bottoni e array in cui inserire gli id dei post a cui viene messo like
-let buttons = document.getElementsByClassName("like-button");
-let likedId = [];
+addLike()
 
 
-for (index=0; index < buttons.length; index++){
-
-    buttons[index].addEventListener("click", function(e){
-        e.preventDefault(); //al click sul bottone impedisce di tornare a inizio pagina
-        
-        //aggiungo la classe per cambiare colore al bottone
-        this.classList.add("like-button--liked");
-        
-        let likeCounter = document.getElementById("like-counter-" + index).textContent;
-        
-        likeCounter++;
-        
-        document.getElementById("like-counter-" + index).textContent = likeCounter;
-        console.log(likeCounter)
-    })
-}
+function addLike(){
+    //variabili per selezionare i bottoni e array in cui inserire gli id dei post a cui viene messo like
+    const buttons = document.getElementsByClassName("like-button");
     
+    for (let index=0; index < buttons.length; index++){
 
+        buttons[index].addEventListener("click", function(e){
+            e.preventDefault(); //al click sul bottone impedisce di tornare a inizio pagina
+            
+            //aggiungo la classe per cambiare colore al bottone
+            this.classList.add("like-button--liked");
+            
+            let likeCounter = document.getElementById("like-counter-" + index).textContent;
+            
+            //incremento il contatore di like di 1
+            likeCounter++;
+            
+            //cambio il valore con il nuovo valore incrementato
+            document.getElementById("like-counter-" + index).textContent = likeCounter;
+            console.log(likeCounter)
+            console.log(index)
+            
+        })
+        
+    }
+}   
 
 
 //funzione per stampare i post nell'html 
@@ -120,7 +125,7 @@ function createPosts(post){
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-${post[index].id}" class="js-likes-counter">${post[index].likes}</b> persone
+                    Piace a <b id="like-counter-${index}" class="js-likes-counter">${post[index].likes}</b> persone
                 </div>
             </div> 
         </div>            
