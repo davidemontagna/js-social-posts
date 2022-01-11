@@ -65,7 +65,7 @@ for(index = 0; index < posts.length; index++){
 }
 
 //variabili per selezionare i bottoni e array in cui inserire gli id dei post a cui viene messo like
-let buttons = document.querySelectorAll(".like-button");
+let buttons = document.getElementsByClassName("like-button");
 let likedId = [];
 
 
@@ -77,10 +77,11 @@ for (index=0; index < buttons.length; index++){
         //aggiungo la classe per cambiare colore al bottone
         this.classList.add("like-button--liked");
         
-        let likeCounter = document.querySelector(".likes__counter");
-        let addLike = posts[index].likes;
-        addLike++;
-        likeCounter.innerHTML = `Piace a <b id="like-counter-${posts[index].id}" class="js-likes-counter">${addLike}</b> persone`
+        let likeCounter = document.getElementById("like-counter-" + index).textContent;
+        
+        likeCounter++;
+        
+        document.getElementById("like-counter-" + index).textContent = likeCounter;
         console.log(likeCounter)
     })
 }
