@@ -72,8 +72,16 @@ let likedId = [];
 for (index=0; index < buttons.length; index++){
 
     buttons[index].addEventListener("click", function(e){
-        e.preventDefault();
+        e.preventDefault(); //al click sul bottone impedisce di tornare a inizio pagina
+        
+        //aggiungo la classe per cambiare colore al bottone
         this.classList.add("like-button--liked");
+        
+        let likeCounter = document.querySelector(".likes__counter");
+        let addLike = posts[index].likes;
+        addLike++;
+        likeCounter.innerHTML = `Piace a <b id="like-counter-${posts[index].id}" class="js-likes-counter">${addLike}</b> persone`
+        console.log(likeCounter)
     })
 }
     
@@ -81,7 +89,7 @@ for (index=0; index < buttons.length; index++){
 
 
 //funzione per stampare i post nell'html 
-function createPosts(posts){
+function createPosts(post){
 
     const containerPosts = document.getElementById("container");
 
@@ -90,17 +98,17 @@ function createPosts(posts){
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src="${posts[index].author.image}" alt="Phil Mangione">                    
+                    <img class="profile-pic" src="${post[index].author.image}" alt="Phil Mangione">                    
                 </div>
                 <div class="post-meta__data">
-                    <div class="post-meta__author">${posts[index].author.name}</div>
-                    <div class="post-meta__time">${dateUs(posts[index].created)}</div>
+                    <div class="post-meta__author">${post[index].author.name}</div>
+                    <div class="post-meta__time">${dateUs(post[index].created)}</div>
                 </div>                    
             </div>
         </div>
-        <div class="post__text">${posts[index].content}</div>
+        <div class="post__text">${post[index].content}</div>
         <div class="post__image">
-            <img src="${posts[index].media}" alt="">
+            <img src="${post[index].media}" alt="">
         </div>
         <div class="post__footer">
             <div class="likes js-likes">
@@ -111,7 +119,7 @@ function createPosts(posts){
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${posts[index].likes}</b> persone
+                    Piace a <b id="like-counter-${post[index].id}" class="js-likes-counter">${post[index].likes}</b> persone
                 </div>
             </div> 
         </div>            
