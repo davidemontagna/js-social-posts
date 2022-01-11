@@ -73,7 +73,7 @@ for (index=0; index < buttons.length; index++){
 
     buttons[index].addEventListener("click", function(e){
         e.preventDefault();
-        
+        this.classList.add("like-button--liked");
     })
 }
     
