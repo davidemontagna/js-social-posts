@@ -56,12 +56,35 @@ const posts = [
     }
 ];
 
+//ciclo per inserire i post nell'html
 for(index = 0; index < posts.length; index++){
-    createPosts(posts)
+    
+    //richiamo la funzione che serve a stampare i post
+    createPosts(posts);
+    
 }
 
+//variabili per selezionare i bottoni e array in cui inserire gli id dei post a cui viene messo like
+let buttons = document.querySelectorAll(".like-button");
+let likedId = [];
+
+
+for (index=0; index < buttons.length; index++){
+
+    buttons[index].addEventListener("click", function(e){
+        e.preventDefault();
+        
+    })
+}
+    
+
+
+
+//funzione per stampare i post nell'html 
 function createPosts(posts){
+
     const containerPosts = document.getElementById("container");
+
     containerPosts.innerHTML += `
     <div class="post">
         <div class="post__header">
@@ -71,7 +94,7 @@ function createPosts(posts){
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${posts[index].author.name}</div>
-                    <div class="post-meta__time">${posts[index].created}</div>
+                    <div class="post-meta__time">${dateUs(posts[index].created)}</div>
                 </div>                    
             </div>
         </div>
@@ -94,4 +117,12 @@ function createPosts(posts){
         </div>            
     </div>
     `
+}
+
+//funzione per trasformare la data in formato americano
+function dateUs(date) {
+    let splitString = date.split("-");
+    let reverseArray = splitString.reverse();
+    let joinArray = reverseArray.join("-");
+    return joinArray;
 }
